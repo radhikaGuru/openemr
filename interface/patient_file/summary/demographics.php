@@ -619,6 +619,7 @@ require_once("$srcdir/options.js.php");
             echo js_escape($result['fname'] . " " . $result['lname'] . " (" . $result['pronoun'] . ")") .
                 "," . js_escape($pid) . ", " . js_escape(" | MRN: " . $result['pubpid']) . ",'',";
         if (empty($date_of_death)) {
+            $regdate= '<span class="highlighted">'.$regdate.'</span>';
             echo js_escape(" " . xl('DOB') . ": "
                 . oeFormatShortDate($result['DOB_YMD']) . " | "
                 . xl('Age') . ": " . getPatientAgeDisplay($result['DOB_YMD']) .
