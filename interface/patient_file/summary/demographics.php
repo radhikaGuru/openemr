@@ -619,12 +619,12 @@ require_once("$srcdir/options.js.php");
             echo js_escape($result['fname'] . " " . $result['lname'] . " (" . $result['pronoun'] . ")") .
                 "," . js_escape($pid) . ", " . js_escape(" | MRN: " . $result['pubpid']) . ",'',";
         if (empty($date_of_death)) {
-            $regdate= '<span class="highlighted">'.$regdate.'</span>';
+            $regdate= '<span style="background-color: #FFFF00">'.$regdate.'</span>';
             echo js_escape(" " . xl('DOB') . ": "
                 . oeFormatShortDate($result['DOB_YMD']) . " | "
                 . xl('Age') . ": " . getPatientAgeDisplay($result['DOB_YMD']) .
                 " | " . xl("Gender ID") . " " . js_escape($result['gender_id']) .
-                " | " . xl("Reg Date") . " : " . json_encode($regdate, JSON_UNESCAPED_SLASHES)
+                " | " . xl("Reg Date") . " : " .$regdate
             );
         } else {
             echo js_escape(" " . xl('DOB') . ": " . oeFormatShortDate($result['DOB_YMD']) . " " . xl('Age at death')
