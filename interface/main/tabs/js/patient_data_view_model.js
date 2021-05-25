@@ -19,17 +19,18 @@ function encounter_data(id,date,category)
     return this;
 }
 
-function patient_data_view_model(pname,pid,pubpid,str_dob)
+function patient_data_view_model(pname,regdate,pid,pubpid,str_dob)
 {
     var self=this;
     self.pname=ko.observable(pname);
     self.pid=ko.observable(pid);
     self.pubpid=ko.observable(pubpid);
     self.str_dob=ko.observable(str_dob);
+    self.regdate=ko.observable(regdate);
     self.patient_picture=ko.computed(function(){
       return webroot_url + '/controller.php' +
              '?document&retrieve' +
-             '&patient_id=' + encodeURIComponent(pid) +
+             '&patient_id=' + pubpid +
              '&document_id=-1' +
              '&as_file=false' +
              '&original_file=true' +
@@ -47,7 +48,7 @@ function patient_data_view_model(pname,pid,pubpid,str_dob)
        for(var encIdx=0;encIdx<self.encounterArray().length;encIdx++)
        {
            var curEnc=self.encounterArray()[encIdx];
-           if(curEnc.id()==newVal)
+           if(curEnc.id()===newVal)
            {
 
                self.selectedEncounter(curEnc);
