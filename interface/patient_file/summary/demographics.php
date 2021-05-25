@@ -608,29 +608,11 @@ require_once("$srcdir/options.js.php");
             if (!empty($date_of_death)) {
                 $date_of_death = $date_of_death['date_deceased'];
             }
+            $regdate='2020-02-02';
             ?>
-        parent.left_nav.setPatient(<?php
-            $firstname_pref = '';
-            if (!empty($result['fname_pref'])) {
-                $firstname_pref = $result['fname_pref'];
-            } else {
-                $firstname_pref = $result['fname'];
-            }
-            echo js_escape($result['fname'] . " " . $result['lname'] . " (" . $result['pronoun'] . ")") .
-                "," . js_escape($pid) . ", " . js_escape(" | MRN: " . $result['pubpid']) . ",'',";
-        if (empty($date_of_death)) {
-            $regdate= '<span style="background-color: #FFFF00">'.$regdate.'</span>';
-            echo js_escape(" " . xl('DOB') . ": "
-                . oeFormatShortDate($result['DOB_YMD']) . " | "
-                . xl('Age') . ": " . getPatientAgeDisplay($result['DOB_YMD']) .
-                " | " . xl("Gender ID") . " " . js_escape($result['gender_id']) .
-                " | " . xl("Reg Date") . " : " .$regdate
-            );
-        } else {
-            echo js_escape(" " . xl('DOB') . ": " . oeFormatShortDate($result['DOB_YMD']) . " " . xl('Age at death')
-                . ": " . oeFormatAge($result['DOB_YMD'], $date_of_death));
-        }
-        ?>);
+        parent.left_nav.setPatient(<?php echo "'" . addslashes($result['fname']) . " " . addslashes($result['lname']) ."','"."Reg date : ".$regdate.
+    "'," . addslashes($pid) . ",'" . addslashes($result['pubpid']) .
+    "','', ' " . xls('DOB') . ": " . addslashes(oeFormatShortDate($result['DOB_YMD'])) . " " . xls('Age') . ": " . addslashes(getPatientAgeDisplay($result['DOB_YMD'])) . "'"; ?>);
         var EncounterDateArray = new Array;
         var CalendarCategoryArray = new Array;
         var EncounterIdArray = new Array;
