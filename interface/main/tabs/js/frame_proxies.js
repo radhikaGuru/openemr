@@ -24,29 +24,30 @@ var left_nav = {
 
 };
 
-left_nav.setPatient = function(pname, pid, pubpid, frname, str_dob)
-{
-    if((app_view_model.application_data.patient()!==null) && (pid===app_view_model.application_data.patient().pid()))
+left_nav.setPatient = function(pname, regdate, pid, pubpid, frname, str_dob)
+{  
+    //var regdate = 'testing';
+    if(
+        (app_view_model.application_data.patient()!==null)
+        && (pid===app_view_model.application_data.patient().pid()))
     {
         app_view_model.application_data.patient().pname(pname);
         app_view_model.application_data.patient().pubpid(pubpid);
         app_view_model.application_data.patient().str_dob(str_dob);
+        app_view_model.application_data.patient().regdate(regdate);
 
         return;
     }
-    var new_patient=new patient_data_view_model(pname,pid,pubpid,str_dob);
+    var new_patient=new patient_data_view_model(pname,regdate,pid,pubpid,str_dob);
     app_view_model.application_data.patient(new_patient);
-    app_view_model.application_data.therapy_group(null);
-    navigateTab(webroot_url+"/interface/patient_file/history/encounters.php","enc", function () {
-        tabCloseByName('rev');
-    });
-
+    app_view_model.application_data.therapy_group(null)
+    navigateTab(webroot_url+"/interface/patient_file/history/encounters.php","enc");
+    tabCloseByName('rev');
     /* close therapy group tabs */
     tabCloseByName('gdg');
     attendant_type = 'patient';
     app_view_model.attendant_template_type('patient-data-template');
 };
-
 left_nav.setTherapyGroup = function(group_id, group_name){
 
     if((app_view_model.application_data.therapy_group()!==null) && (group_id===app_view_model.application_data.therapy_group().gid()))
