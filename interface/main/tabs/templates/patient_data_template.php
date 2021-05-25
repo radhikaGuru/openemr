@@ -73,6 +73,7 @@ switch ($search_any_type) {
                 </a>
                 <div>
                     <span data-bind="text:patient().str_dob()"></span>
+                    <span style="background-color: yellow" data-bind="text: patient().regdate"></span>
                 </div>
                 <!-- /ko -->
             </div>
